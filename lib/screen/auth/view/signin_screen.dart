@@ -1,5 +1,6 @@
+import 'package:chat_app/utils/helper/fireauth_helper.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:get/route_manager.dart';
 
 class SigninScreen extends StatefulWidget {
   const SigninScreen({super.key});
@@ -10,6 +11,8 @@ class SigninScreen extends StatefulWidget {
 
 class _SigninScreenState extends State<SigninScreen> {
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  TextEditingController txtEmail = TextEditingController();
+  TextEditingController txtPassword = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -37,28 +40,50 @@ class _SigninScreenState extends State<SigninScreen> {
                   ),
                   TextFormField(
                     keyboardType: TextInputType.emailAddress,
+                    controller: txtEmail,
                     decoration: InputDecoration(
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12)),
                         fillColor: Colors.grey,
                         labelText: "Email"),
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return "Email is required";
+                      }
+                      return null;
+                    },
                   ),
                   const SizedBox(
                     height: 30,
                   ),
                   TextFormField(
+                    controller: txtPassword,
                     keyboardType: TextInputType.text,
                     decoration: InputDecoration(
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12)),
                         fillColor: Colors.grey,
                         labelText: "Password"),
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return "Password is required";
+                      }
+                      return null;
+                    },
                   ),
                   const SizedBox(
                     height: 30,
                   ),
                   InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      FireAuthHelper.helper
+                          .signInAuth(txtEmail.text, txtPassword.text);
+
+                      bool response = FireAuthHelper.helper.checkUser();
+                      if (response) {
+                        Get.offAllNamed('user');
+                      }
+                    },
                     child: Container(
                       height: 50,
                       width: MediaQuery.sizeOf(context).width,
@@ -85,10 +110,18 @@ class _SigninScreenState extends State<SigninScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Image.asset(
-                        "assets/logo/google.png",
-                        fit: BoxFit.cover,
-                        height: 50,
+                      InkWell(
+                        onTap: () async {
+                          await FireAuthHelper.helper.signInWithGoogle().then((value) {
+                            FireAuthHelper.helper.checkUser();
+                            Get.offAllNamed('user');
+                          },);
+                        },
+                        child: Image.asset(
+                          "assets/logo/google.png",
+                          fit: BoxFit.cover,
+                          height: 50,
+                        ),
                       ),
                       Image.asset(
                         "assets/logo/facebook.png",
@@ -104,7 +137,9 @@ class _SigninScreenState extends State<SigninScreen> {
                   ),
                   const SizedBox(height: 50),
                   InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.pushNamed(context, 'signUp');
+                    },
                     child: RichText(
                       text: const TextSpan(
                         children: [
