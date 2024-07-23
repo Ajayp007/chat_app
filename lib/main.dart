@@ -12,7 +12,7 @@ Future<void> main() async {
   );
   runApp(
     GetMaterialApp(
-
+      initialRoute: 'home',
       debugShowCheckedModeBanner: false,
       routes: appRoutes,
     ),

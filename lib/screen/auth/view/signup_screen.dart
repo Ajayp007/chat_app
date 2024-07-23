@@ -32,51 +32,42 @@ class _SignupScreenState extends State<SignupScreen> {
                   "assets/logo/Login-pana (1).png",
                   height: 300,
                 ),
-                const SizedBox(
-                  height: 30,
-                ),
+                const SizedBox(height: 30),
                 TextFormField(
                   controller: txtEmail,
                   keyboardType: TextInputType.emailAddress,
                   decoration: InputDecoration(
                       border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12)),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
                       fillColor: Colors.grey,
                       labelText: "Email"),
-
                 ),
-                const SizedBox(
-                  height: 30,
-                ),
+                const SizedBox(height: 30),
                 TextFormField(
                   controller: txtPassword,
                   keyboardType: TextInputType.text,
                   decoration: InputDecoration(
                       border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12)),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
                       fillColor: Colors.grey,
                       labelText: "Password"),
                 ),
-                const SizedBox(
-                  height: 30,
-                ),
+                const SizedBox(height: 30),
                 InkWell(
                   onTap: () async {
                     String done = await FireAuthHelper.helper
                         .signUpAuth(txtEmail.text, txtPassword.text);
                     if (done == "Success") {
                       Get.offAllNamed('signIn');
+                    } else {
+                      Get.snackbar("Chat ", done);
                     }
-                    else
-                      {
-                        Get.snackbar("Chat ", done);
-                      }
                   },
                   child: Container(
                     height: 50,
-                    width: MediaQuery
-                        .sizeOf(context)
-                        .width,
+                    width: MediaQuery.sizeOf(context).width,
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
                       color: const Color(0xff084759),

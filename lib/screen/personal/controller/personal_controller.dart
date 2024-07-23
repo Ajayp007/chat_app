@@ -1,9 +1,11 @@
-import 'package:chat_app/screen/auth/model/user_model.dart';
+
 import 'package:get/get.dart';
+
+import '../model/personal_model.dart';
 
 class UserController extends GetxController
 {
-  Rx<UserModel> model = UserModel().obs;
+  Rx<PersonalModel> model = PersonalModel().obs;
 
   void getUserData()
   {

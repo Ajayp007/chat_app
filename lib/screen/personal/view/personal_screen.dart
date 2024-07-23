@@ -1,15 +1,17 @@
-import 'package:chat_app/screen/auth/model/user_model.dart';
 import 'package:chat_app/utils/helper/firedb_helper.dart';
 import 'package:flutter/material.dart';
+import 'package:get/route_manager.dart';
 
-class UserdetailScreen extends StatefulWidget {
-  const UserdetailScreen({super.key});
+import '../model/personal_model.dart';
+
+class PersonalDetailScreen extends StatefulWidget {
+  const PersonalDetailScreen({super.key});
 
   @override
-  State<UserdetailScreen> createState() => _UserdetailScreenState();
+  State<PersonalDetailScreen> createState() => _PersonalDetailScreenState();
 }
 
-class _UserdetailScreenState extends State<UserdetailScreen> {
+class _PersonalDetailScreenState extends State<PersonalDetailScreen> {
   TextEditingController txtName = TextEditingController();
   TextEditingController txtEmail = TextEditingController();
   TextEditingController txtMobile = TextEditingController();
@@ -25,8 +27,12 @@ class _UserdetailScreenState extends State<UserdetailScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("About"),
-        centerTitle: true,
+        backgroundColor: const Color(0xff084759),
+        iconTheme: const IconThemeData(color: Colors.white),
+        title: const Text(
+          "About",
+          style: TextStyle(color: Colors.white),
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(12),
@@ -99,12 +105,13 @@ class _UserdetailScreenState extends State<UserdetailScreen> {
             ),
             InkWell(
               onTap: () {
-                UserModel model = UserModel(
+                PersonalModel model = PersonalModel(
                   name: txtName.text,
                   mobile: txtMobile.text,
                   email: txtEmail.text,
                 );
                 FireDbHelper.helper.getUser(model);
+                Get.toNamed('home');
               },
               child: Container(
                 height: 50,
