@@ -18,9 +18,14 @@ class FireDbHelper {
     await fireStore.collection('user').doc(uId).set(m1.modelToMap());
   }
 
-  Future<DocumentSnapshot<Map<String, dynamic>>> getUserData()
-  {
+  Future<DocumentSnapshot<Map<String, dynamic>>> getUserData() {
     return fireStore.collection('user').doc(uId).get();
   }
 
+  Future<void> currentUser() async {
+    DocumentSnapshot snapshot =
+        await fireStore.collection('user').doc(uId).get();
+    Map m1 = snapshot.data() as Map;
+    UserModel.mapToModel(m1);
+  }
 }

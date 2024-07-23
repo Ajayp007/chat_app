@@ -1,3 +1,5 @@
+import 'package:chat_app/screen/auth/model/user_model.dart';
+import 'package:chat_app/utils/helper/firedb_helper.dart';
 import 'package:flutter/material.dart';
 
 class UserdetailScreen extends StatefulWidget {
@@ -16,10 +18,8 @@ class _UserdetailScreenState extends State<UserdetailScreen> {
   void initState() {
     super.initState();
   }
-  void userData()
-  {
 
-  }
+  void userData() {}
 
   @override
   Widget build(BuildContext context) {
@@ -28,13 +28,17 @@ class _UserdetailScreenState extends State<UserdetailScreen> {
         title: const Text("About"),
         centerTitle: true,
       ),
-      body:  Padding(
+      body: Padding(
         padding: const EdgeInsets.all(12),
         child: Column(
           children: [
             const CircleAvatar(
               radius: 70,
-              child: Icon(Icons.person,size: 80,color: Color(0xff084759),),
+              child: Icon(
+                Icons.person,
+                size: 80,
+                color: Color(0xff084759),
+              ),
             ),
             const SizedBox(
               height: 30,
@@ -56,7 +60,8 @@ class _UserdetailScreenState extends State<UserdetailScreen> {
             ),
             const SizedBox(
               height: 30,
-            ), TextFormField(
+            ),
+            TextFormField(
               keyboardType: TextInputType.emailAddress,
               controller: txtEmail,
               decoration: InputDecoration(
@@ -94,7 +99,12 @@ class _UserdetailScreenState extends State<UserdetailScreen> {
             ),
             InkWell(
               onTap: () {
-
+                UserModel model = UserModel(
+                  name: txtName.text,
+                  mobile: txtMobile.text,
+                  email: txtEmail.text,
+                );
+                FireDbHelper.helper.getUser(model);
               },
               child: Container(
                 height: 50,

@@ -112,10 +112,9 @@ class _SigninScreenState extends State<SigninScreen> {
                     children: [
                       InkWell(
                         onTap: () async {
-                          await FireAuthHelper.helper.signInWithGoogle().then((value) {
-                            FireAuthHelper.helper.checkUser();
-                            Get.offAllNamed('user');
-                          },);
+                          await FireAuthHelper.helper.signInWithGoogle();
+                          FireAuthHelper.helper.checkUser();
+                          Get.offAllNamed('user');
                         },
                         child: Image.asset(
                           "assets/logo/google.png",
