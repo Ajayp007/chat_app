@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/route_manager.dart';
 
 class UsersScreen extends StatefulWidget {
   const UsersScreen({super.key});
@@ -22,7 +23,10 @@ class _UsersScreenState extends State<UsersScreen> {
       body: ListView.builder(
         itemCount: 20,
         itemBuilder: (context, index) {
-          return const ListTile(
+          return  ListTile(
+            onTap: () {
+              Get.toNamed('chat');
+            },
             leading: CircleAvatar(
               radius: 40,
             ),
