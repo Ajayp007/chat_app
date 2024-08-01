@@ -57,13 +57,9 @@ class _SignupScreenState extends State<SignupScreen> {
                 const SizedBox(height: 30),
                 InkWell(
                   onTap: () async {
-                    String done = await FireAuthHelper.helper
+                   await FireAuthHelper.helper
                         .signUpAuth(txtEmail.text, txtPassword.text);
-                    if (done == "Success") {
-                      Get.offAllNamed('signIn');
-                    } else {
-                      Get.snackbar("Chat ", done);
-                    }
+                    Get.offAllNamed('signIn');
                   },
                   child: Container(
                     height: 50,
@@ -86,7 +82,8 @@ class _SignupScreenState extends State<SignupScreen> {
                 const SizedBox(height: 30),
                 InkWell(
                   onTap: () {
-                    Navigator.pushNamed(context, 'signIn');
+                    FireAuthHelper.helper.signUpAuth(txtEmail.text, txtPassword.text);
+                    Get.offAllNamed('signIn');
                   },
                   child: RichText(
                     text: const TextSpan(

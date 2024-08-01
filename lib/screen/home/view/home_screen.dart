@@ -1,4 +1,5 @@
 import 'package:chat_app/utils/helper/fireauth_helper.dart';
+import 'package:chat_app/utils/services/notification_services.dart';
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
 
@@ -21,6 +22,13 @@ class _HomeScreenState extends State<HomeScreen> {
           style: TextStyle(color: Colors.white),
         ),
         actions: [
+          IconButton(
+            onPressed: ()  {
+              //NotificationServices.notify.simpleNotification();
+              NotificationServices.notify.scheduleNotification();
+            },
+            icon: const Icon(Icons.notification_add_outlined),
+          ),
           IconButton(
             onPressed: () {
               Get.toNamed('user');

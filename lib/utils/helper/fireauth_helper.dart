@@ -45,6 +45,7 @@ class FireAuthHelper {
 
   Future<void> signOutAuth() async {
     await FirebaseAuth.instance.signOut();
+    await GoogleSignIn().signOut();
   }
 
   Future<UserCredential> signInWithGoogle() async {

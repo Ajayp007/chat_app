@@ -74,32 +74,22 @@ class _SigninScreenState extends State<SigninScreen> {
                   const SizedBox(
                     height: 30,
                   ),
-                  InkWell(
-                    onTap: () {
-                      FireAuthHelper.helper
-                          .signInAuth(txtEmail.text, txtPassword.text);
+                  SizedBox(
+                    width: MediaQuery.sizeOf(context).width,
+                    child: MaterialButton(
+                      textColor: Colors.white,
+                      height: 40,
+                      color: const Color(0xff084759),
+                      onPressed: () {
+                        FireAuthHelper.helper
+                            .signInAuth(txtEmail.text, txtPassword.text);
 
-                      bool response = FireAuthHelper.helper.checkUser();
-                      if (response) {
-                        Get.offAllNamed('user');
-                      }
-                    },
-                    child: Container(
-                      height: 50,
-                      width: MediaQuery.sizeOf(context).width,
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                        color: const Color(0xff084759),
-                        borderRadius: BorderRadius.circular(12),
-                        border: Border.all(),
-                      ),
-                      child: const Text(
-                        "Sign in",
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 19,
-                            fontWeight: FontWeight.bold),
-                      ),
+                        bool response = FireAuthHelper.helper.checkUser();
+                        if (response) {
+                          Get.offAllNamed('user');
+                        }
+                      },
+                      child: const Text("Sign in"),
                     ),
                   ),
                   const SizedBox(height: 30),

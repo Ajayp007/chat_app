@@ -1,10 +1,10 @@
-class PersonalModel {
+class ProfileModel {
   String? name, email, mobile,uId;
 
-  PersonalModel({this.name, this.email, this.mobile,this.uId});
+  ProfileModel({this.name, this.email, this.mobile,this.uId});
 
-  factory PersonalModel.mapToModel(Map m1) {
-    return PersonalModel(
+  factory ProfileModel.mapToModel(Map m1) {
+    return ProfileModel(
         name: m1['name'], email: m1['email'], mobile: m1['mobile']);
   }
 
