@@ -23,9 +23,9 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         actions: [
           IconButton(
-            onPressed: ()  {
-              //NotificationServices.notify.simpleNotification();
-              NotificationServices.notify.scheduleNotification();
+            onPressed: () {
+              NotificationServices.notify.simpleNotification();
+              //NotificationServices.notify.scheduleNotification();
             },
             icon: const Icon(Icons.notification_add_outlined),
           ),
@@ -64,6 +64,19 @@ class _HomeScreenState extends State<HomeScreen> {
           Icons.add,
           color: Colors.white,
         ),
+      ),
+      body: ListView.builder(
+        itemCount: 10,
+        itemBuilder: (context, index) {
+          return  ListTile(
+            onTap: () {
+              Get.toNamed('chat');
+            },
+            leading: CircleAvatar(),
+            title: Text("Name"),
+            subtitle: Text("+91 8140986630"),
+          );
+        },
       ),
     );
   }

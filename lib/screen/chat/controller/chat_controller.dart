@@ -15,3 +15,4 @@ class ChatController extends GetxController {
     return FireDbHelper.helper.chatMessages();
   }
 }
+

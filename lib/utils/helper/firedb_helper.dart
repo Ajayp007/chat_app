@@ -37,15 +37,15 @@ class FireDbHelper {
 
     QuerySnapshot querySnapshot = await fireStore
         .collection('user')
-        .where("mobile", isEqualTo: m1.mobile)
+        .where("mobile", isNotEqualTo: m1.mobile)
         .get();
     List<QueryDocumentSnapshot> l1 = querySnapshot.docs;
     for (var x in l1) {
       var a = x.id;
       Map m1 = x.data() as Map;
-      ProfileModel p1 = ProfileModel.mapToModel(m1);
-      p1.uId = a;
-      list.add(p1);
+      ProfileModel model = ProfileModel.mapToModel(m1);
+      model.uId = a;
+      list.add(model);
     }
     return list;
   }
@@ -63,16 +63,6 @@ class FireDbHelper {
     }
   }
 
-  void sendMessage(
-      {required String id, required String message, required DateTime date}) {
-    fireStore.collection("chat").doc(id).collection('msg').add(
-      {
-        "message": message,
-        'uid': FireAuthHelper.helper.user!.uid,
-        "datetime": date
-      },
-    );
-  }
   Future<String?> getChatDocId(String myId, String user2id) async {
     QuerySnapshot qs = await fireStore
         .collection('chat')
@@ -99,9 +89,21 @@ class FireDbHelper {
       }
     }
   }
+
+  void sendMessage(
+      {required String id, required String message, required DateTime date}) {
+    fireStore.collection('chat').doc(id).collection('msg').add(
+      {
+        "message": message,
+        'uid': FireAuthHelper.helper.user!.uid,
+        "datetime": date
+      },
+    );
+  }
+
   Stream<QuerySnapshot<Map<String, dynamic>>> chatMessages() {
     return fireStore
-        .collection("chat")
+        .collection('chat')
         .doc(id)
         .collection('msg')
         .orderBy('datetime')

@@ -91,7 +91,20 @@ class _ChatScreenState extends State<ChatScreen> {
                                 ],
                               );
                             },
-                            child: Text("${chatModelList[index].message}"),
+                            child: Container(
+                              height: 30,
+                              width: MediaQuery.sizeOf(context).width * 0.7,
+                              alignment: Alignment.center,
+                              margin: const EdgeInsets.only(
+                                  left: 20, top: 5, right: 1),
+                              decoration: BoxDecoration(
+                                  color: const Color(0xff084759),
+                                  borderRadius: BorderRadius.circular(8)),
+                              child: Text(
+                                "${chatModelList[index].message}",
+                                style: const TextStyle(color: Colors.white),
+                              ),
+                            ),
                           ),
                         );
                       },
@@ -104,10 +117,14 @@ class _ChatScreenState extends State<ChatScreen> {
               );
             },
           ),
-          Spacer(),
+          const Spacer(),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: SearchBar(
+              controller: txtMsg,
+              textStyle: WidgetStateProperty.all(
+                const TextStyle(color: Colors.white),
+              ),
               backgroundColor: WidgetStateProperty.all(
                 const Color(0xff084759),
               ),
