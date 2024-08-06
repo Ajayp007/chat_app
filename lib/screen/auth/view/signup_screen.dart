@@ -55,28 +55,19 @@ class _SignupScreenState extends State<SignupScreen> {
                       labelText: "Password"),
                 ),
                 const SizedBox(height: 30),
-                InkWell(
-                  onTap: () async {
-                   await FireAuthHelper.helper
-                        .signUpAuth(txtEmail.text, txtPassword.text);
-                    Get.offAllNamed('signIn');
-                  },
-                  child: Container(
-                    height: 50,
-                    width: MediaQuery.sizeOf(context).width,
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                      color: const Color(0xff084759),
-                      borderRadius: BorderRadius.circular(12),
-                      border: Border.all(),
-                    ),
-                    child: const Text(
-                      "Sign Up",
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 19,
-                          fontWeight: FontWeight.bold),
-                    ),
+
+                SizedBox(
+                  width: MediaQuery.sizeOf(context).width,
+                  child: MaterialButton(
+                    textColor: Colors.white,
+                    height: 40,
+                    color: const Color(0xff084759),
+                    onPressed: () async {
+                      await FireAuthHelper.helper
+                          .signUpAuth(txtEmail.text, txtPassword.text);
+                      Get.offAllNamed('signIn');
+                    },
+                    child: const Text("Sign Up"),
                   ),
                 ),
                 const SizedBox(height: 30),

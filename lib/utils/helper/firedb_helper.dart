@@ -1,8 +1,7 @@
 import 'package:chat_app/screen/profile/model/profile_model.dart';
+import 'package:chat_app/screen/user/model/user_model.dart';
 import 'package:chat_app/utils/helper/fireauth_helper.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-
-import '../../screen/chat/model/chat_model.dart';
 
 class FireDbHelper {
   static FireDbHelper helper = FireDbHelper._();
@@ -32,23 +31,26 @@ class FireDbHelper {
     return model;
   }
 
-  Future<List<ProfileModel>> getAllUser(ProfileModel m1) async {
-    List<ProfileModel> list = [];
-
-    QuerySnapshot querySnapshot = await fireStore
+  Future<List<UserModel>> getAllUser(ProfileModel p1) async {
+    List<UserModel> listData = [];
+    //
+    QuerySnapshot qs = await fireStore
         .collection('user')
-        .where("mobile", isNotEqualTo: m1.mobile)
+        .where("mobile", isNotEqualTo: p1.mobile)
         .get();
-    List<QueryDocumentSnapshot> l1 = querySnapshot.docs;
-    for (var x in l1) {
-      var a = x.id;
+    List<QueryDocumentSnapshot> document = qs.docs;
+
+    for (var x in document) {
+      var ket = x.id;
       Map m1 = x.data() as Map;
-      ProfileModel model = ProfileModel.mapToModel(m1);
-      model.uId = a;
-      list.add(model);
+
+      UserModel model = UserModel.mapToModel(m1);
+      model.id = ket;
+      listData.add(model);
     }
-    return list;
+    return listData;
   }
+
 
   Future<void> checkChatId(
       String myId, String user2id, DateTime date, String message) async {
@@ -114,20 +116,19 @@ class FireDbHelper {
     fireStore.collection('chat').doc(id).collection('msg').doc(uid).delete();
   }
 
-  Future<void> chatWithUser() async {
-    List<ChatModel> userChat = [];
-    QuerySnapshot qs = await fireStore
-        .collection('chat')
-        .where("Userid1", isEqualTo: FireAuthHelper.helper.user!.uid)
-        .get();
-    QuerySnapshot qs2 = await fireStore
-        .collection('chat')
-        .where("Userid2", isEqualTo: FireAuthHelper.helper.user!.uid)
-        .get();
+  Stream<QuerySnapshot<Map<String, dynamic>>> chatWithUser()  {
+    return fireStore.collection('chat').snapshots();
+  }
 
-    List<Map> m1 = qs.docs as List<Map>;
-    List<Map> m2 = qs2.docs as List<Map>;
+  Future<UserModel> getAllChat(userid) async {
+    DocumentSnapshot ds = await fireStore.collection('user').doc(userid).get();
 
+    Map m1 = ds.data() as Map;
+
+    UserModel model = UserModel.mapToModel(m1);
+    model.id = ds.id;
+
+    return model;
   }
 
 }

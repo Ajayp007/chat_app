@@ -35,42 +35,11 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        children: [
-          Image.network(
-            "https://wallpapers.com/images/hd/love-yourself-quotes-43ff3kbx1bcc7shf.jpg",
-            fit: BoxFit.cover,
-            height: MediaQuery.sizeOf(context).height,
-            width: MediaQuery.sizeOf(context).width,
-          ),
-          const Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Padding(
-                  padding: EdgeInsets.only(left: 16.0),
-                  child: Text(
-                    "Chat App",
-                    style: TextStyle(
-                        fontSize: 30,
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold),
-                  )),
-              SizedBox(height: 10),
-              Padding(
-                padding: EdgeInsets.only(left: 16.0, right: 16.0),
-                child: Text(
-                  "Quote means to repeat the exact words of a speaker or an author. A quote is also a passage or statement repeated in this way. Quote means to cite something as a form of proof.",
-                  style: TextStyle(
-                      fontSize: 30,
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold),
-                ),
-              ),
-              SizedBox(height: 10),
-            ],
-          ),
-        ],
+      body: Image.network(
+        "https://wallpapers.com/images/hd/love-yourself-quotes-43ff3kbx1bcc7shf.jpg",
+        fit: BoxFit.cover,
+        height: MediaQuery.sizeOf(context).height,
+        width: MediaQuery.sizeOf(context).width,
       ),
     );
   }

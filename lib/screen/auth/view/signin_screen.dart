@@ -1,5 +1,7 @@
+import 'package:chat_app/screen/profile/controller/profile_controller.dart';
 import 'package:chat_app/utils/helper/fireauth_helper.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:get/route_manager.dart';
 
 class SigninScreen extends StatefulWidget {
@@ -13,6 +15,7 @@ class _SigninScreenState extends State<SigninScreen> {
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   TextEditingController txtEmail = TextEditingController();
   TextEditingController txtPassword = TextEditingController();
+  ProfileController controller = Get.put(ProfileController());
 
   @override
   Widget build(BuildContext context) {
@@ -80,13 +83,14 @@ class _SigninScreenState extends State<SigninScreen> {
                       textColor: Colors.white,
                       height: 40,
                       color: const Color(0xff084759),
-                      onPressed: () {
+                      onPressed: () async {
                         FireAuthHelper.helper
                             .signInAuth(txtEmail.text, txtPassword.text);
 
                         bool response = FireAuthHelper.helper.checkUser();
                         if (response) {
                           Get.offAllNamed('user');
+                          await controller.getUserData();
                         }
                       },
                       child: const Text("Sign in"),

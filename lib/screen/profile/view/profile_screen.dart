@@ -41,7 +41,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         backgroundColor: const Color(0xff084759),
         iconTheme: const IconThemeData(color: Colors.white),
         title: const Text(
-          "About",
+          "My Profile",
           style: TextStyle(color: Colors.white),
         ),
       ),
@@ -116,9 +116,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
               const SizedBox(
                 height: 30,
               ),
-              InkWell(
-                onTap: () {
-                  if(formKey.currentState!.validate())
+              SizedBox(
+                width: MediaQuery.sizeOf(context).width,
+                child: MaterialButton(
+                  textColor: Colors.white,
+                  height: 40,
+                  color: const Color(0xff084759),
+                  onPressed: ()  {
+                    if(formKey.currentState!.validate())
                     {
                       ProfileModel model = ProfileModel(
                         name: txtName.text,
@@ -127,24 +132,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       );
                       FireDbHelper.helper.getUser(model);
                     }
-                  Get.toNamed('home');
-                },
-                child: Container(
-                  height: 50,
-                  width: MediaQuery.sizeOf(context).width,
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                    color: const Color(0xff084759),
-                    borderRadius: BorderRadius.circular(12),
-                    border: Border.all(),
-                  ),
-                  child: const Text(
-                    "Submit",
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 19,
-                        fontWeight: FontWeight.bold),
-                  ),
+                    Get.toNamed('home');
+                  },
+                  child: const Text("Submit"),
                 ),
               ),
             ],

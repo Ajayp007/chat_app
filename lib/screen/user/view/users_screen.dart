@@ -3,7 +3,6 @@ import 'package:chat_app/utils/helper/fireauth_helper.dart';
 import 'package:chat_app/utils/helper/firedb_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/route_manager.dart';
 
 class UsersScreen extends StatefulWidget {
   const UsersScreen({super.key});
@@ -34,20 +33,25 @@ class _UsersScreenState extends State<UsersScreen> {
       ),
       body: Obx(
         () => ListView.builder(
-          itemCount: controller.l1.length,
+          itemCount: controller.userModelList.length,
           itemBuilder: (context, index) {
             return ListTile(
               onTap: () async {
                 await FireDbHelper.helper.getChatDocId(
-                    FireAuthHelper.helper.user!.uid, controller.l1[index].uId!);
+                    FireAuthHelper.helper.user!.uid, controller.userModelList[index].id!);
 
-                Get.toNamed('chat', arguments: controller.l1[index]);
+                Get.toNamed('chat', arguments: controller.userModelList[index]);
               },
-              leading: const CircleAvatar(
+              leading: CircleAvatar(
                 radius: 40,
+                backgroundColor: const Color(0xff084759),
+                child: Text(
+                  controller.userModelList[index].name![0],
+                  style: const TextStyle(fontSize: 20, color: Colors.white),
+                ),
               ),
-              title: Text("${controller.l1[index].name}"),
-              subtitle: Text("+91 ${controller.l1[index].mobile}"),
+              title: Text("${controller.userModelList[index].name}"),
+              subtitle: Text("+91 ${controller.userModelList[index].phone}"),
             );
           },
         ),
