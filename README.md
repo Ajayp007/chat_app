@@ -1,7 +1,6 @@
 <div align="center">
 
-<img src="https://github.com/user-attachments/assets/7a7a8c15-e0b3-4561-b708-ae95b76605ba" width="220px">
-
+<img src="https://github.com/user-attachments/assets/f990c0ad-b682-4e53-9a77-d1d4626343e9" width="220px">
 
 # **Chat App**
 Simple Chat app made with Flutter in India.
