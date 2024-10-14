@@ -61,7 +61,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     backgroundColor: Colors.white,
                     child: Text(
                       profileController.model.value.name![0],
-                      style: const TextStyle(fontSize: 35,color:  Color(0xff084759)),
+                      style: const TextStyle(
+                          fontSize: 35, color: Color(0xff084759)),
                     ),
                   ),
                   const SizedBox(
@@ -98,7 +99,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               title: const Text(
                 "Home",
-                style: TextStyle(fontSize: 18,fontWeight: FontWeight.w500),
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
               ),
             ),
             const Divider(),
@@ -112,7 +113,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               title: const Text(
                 "My Chats",
-                style: TextStyle(fontSize: 18,fontWeight: FontWeight.w500),
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
               ),
             ),
             const Divider(),
@@ -126,7 +127,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               title: const Text(
                 "My Profile",
-                style: TextStyle(fontSize: 18,fontWeight: FontWeight.w500),
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
               ),
             ),
             const Divider(),
@@ -138,7 +139,10 @@ class _HomeScreenState extends State<HomeScreen> {
               },
               iconColor: Colors.black,
               textColor: Colors.black,
-              title: const Text("Sign Out",style: TextStyle(fontWeight: FontWeight.w500),),
+              title: const Text(
+                "Sign Out",
+                style: TextStyle(fontWeight: FontWeight.w500),
+              ),
               trailing: const Icon(Icons.logout_outlined),
             ),
           ],
@@ -154,7 +158,7 @@ class _HomeScreenState extends State<HomeScreen> {
           color: Colors.white,
         ),
       ),
-      body:  StreamBuilder(
+      body: StreamBuilder(
         stream: FireDbHelper.helper.chatWithUser(),
         builder: (context, snapshot) {
           if (snapshot.hasError) {
@@ -164,23 +168,19 @@ class _HomeScreenState extends State<HomeScreen> {
 
             QuerySnapshot? qs = snapshot.data;
             List<QueryDocumentSnapshot> qds = qs!.docs;
+
             for (var x in qds) {
               Map m1 = x.data() as Map;
 
               if (m1['Userid1'] == FireAuthHelper.helper.user!.uid) {
-                FireDbHelper.helper
-                    .getAllChat(m1['Userid2'])
-                    .then(
-                      (value) {
+                FireDbHelper.helper.getAllChat(m1['Userid2']).then(
+                  (value) {
                     controller.userList.add(value);
                   },
                 );
-              } else if (m1['Userid2'] ==
-                  FireAuthHelper.helper.user!.uid) {
-                FireDbHelper.helper
-                    .getAllChat(m1['Userid1'])
-                    .then(
-                      (value) {
+              } else if (m1['Userid2'] == FireAuthHelper.helper.user!.uid) {
+                FireDbHelper.helper.getAllChat(m1['Userid1']).then(
+                  (value) {
                     controller.userList.add(value);
                   },
                 );
@@ -188,7 +188,7 @@ class _HomeScreenState extends State<HomeScreen> {
             }
 
             return Obx(
-                  () => ListView.builder(
+              () => ListView.builder(
                 itemCount: controller.userList.length,
                 itemBuilder: (context, index) {
                   return ListTile(

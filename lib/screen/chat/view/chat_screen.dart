@@ -83,8 +83,10 @@ class _ChatScreenState extends State<ChatScreen> {
                         chatModelList.add(model);
                       }
                       if (chatModelList.isEmpty) {
-                        return const Center(
-                          child: Text("Let's Start"),
+                        return const Expanded(
+                          child: Center(
+                            child: Text("Let's Start"),
+                          ),
                         );
                       } else {
                         return Expanded(
