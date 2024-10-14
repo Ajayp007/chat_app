@@ -84,7 +84,7 @@ class _SigninScreenState extends State<SigninScreen> {
                       height: 40,
                       color: const Color(0xff084759),
                       onPressed: () async {
-                        FireAuthHelper.helper
+                      await FireAuthHelper.helper
                             .signInAuth(txtEmail.text, txtPassword.text);
 
                         bool response = FireAuthHelper.helper.checkUser();

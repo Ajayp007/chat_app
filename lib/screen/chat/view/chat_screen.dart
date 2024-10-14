@@ -46,7 +46,6 @@ class _ChatScreenState extends State<ChatScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        
         backgroundColor: const Color(0xff084759),
         iconTheme: const IconThemeData(color: Colors.white),
         title: Text(
@@ -159,36 +158,38 @@ class _ChatScreenState extends State<ChatScreen> {
                     );
                   },
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      SizedBox(
-                        width: MediaQuery.sizeOf(context).width * 0.80,
-                        child: ColoredBox(
-                          color: Colors.white,
-                          child: TextField(
-                            controller: txtMsg,
-                            focusNode: node,
-                            decoration: InputDecoration(
-                                focusedBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(12),
-                                  borderSide: const BorderSide(
-                                    color: Color(0xff084759),
-                                  ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    SizedBox(
+                      width: MediaQuery.sizeOf(context).width * 0.82,
+                      child: ColoredBox(
+                        color: Colors.white,
+                        child: TextField(
+                          controller: txtMsg,
+                          focusNode: node,
+                          decoration: InputDecoration(
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(12),
+                                borderSide: const BorderSide(
+                                  color: Color(0xff084759),
                                 ),
-                                border: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                    color: Color(0xff084759),
-                                  ),
-                                  borderRadius: BorderRadius.circular(12),
+                              ),
+                              border: OutlineInputBorder(
+                                borderSide: const BorderSide(
+                                  color: Color(0xff084759),
                                 ),
-                                hintText: "Send A Message...!"),
-                          ),
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              hintText: "Send A Message...!"),
                         ),
                       ),
-                      IconButton.filled(
+                    ),
+                    const SizedBox(
+                      width: 5,
+                    ),
+                    Expanded(
+                      child: IconButton.filled(
                         style: ButtonStyle(
                           backgroundColor: WidgetStateProperty.all(
                             const Color(0xff084759),
@@ -209,8 +210,8 @@ class _ChatScreenState extends State<ChatScreen> {
                         },
                         icon: const Icon(Icons.send_outlined),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ],
             ),
